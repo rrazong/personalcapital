@@ -1,16 +1,50 @@
 * {
-    box-sizing: border-box;
-    color: blue;
+  box-sizing: border-box;
+  font-family: Verdana,Geneva,sans-serif;
+}
+
+.page {
+  padding: 10px;
 }
 
 #query {
   width: 400px;
   height: 30px;
-  padding: 10px;
+  font-size: 15px;
+  padding: 20px;
   border-radius: 5px;
-  border: solid 1px gray;  
+  border: solid 1px gray;
 }
 
 #results {
+  display: flex;
+  min-width: 600px;
+  min-height: 300px;
+  margin-top: 15px;
+  border: solid 1px gray;
+  border-radius: 5px;
+  background-color: lightgray;
+  color: gray;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 
+.results-middle {
+  justify-content: center;
+  align-items: center;
+}
+
+#results.no-results {
+  align-items: center;
+  justify-content: center;
+}
+
+.pod {
+  width: 40%;
+  margin: 10px;
+  border: 1px solid black; // remove this
+}
+
+.pod ul {
+    list-style-type: none
 }

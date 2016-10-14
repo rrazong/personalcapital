@@ -40,9 +40,24 @@ class Products {
   }
 
   search(query) {
-    return this.loadData().then(function(data) {
-      console.log(`search for ${query} in data`);
-      return ['result1', 'result2'];
-    })
+    return this.loadData()
+      .then(function(data) {
+        // escape user input
+        const regex = new RegExp(escapeRegExp(query), "gi");
+        const results = data.products.reduce((prev, p) => {
+          // filter on name and url
+          if (regex.test(p.name) || regex.test(p.url)) {
+            prev.push(p);
+          }
+          return prev;
+        }, []);
+        return results;
+      });
   }
+}
+
+// move to a util.js file
+// copied from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+function escapeRegExp(string){
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
