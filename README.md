@@ -1,5 +1,8 @@
 # Personal Capital Frontend Test
 
+![Video Walkthrough](http://i.imgur.com/ajvV9Et.gif)
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
 ## Implemented features
 * Search does not begin until at least 3 characters entered to show more relevant results
 * Search starts after user pauses typing to reduce number of API calls
