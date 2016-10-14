@@ -40,7 +40,7 @@ function handleSearch() {
 
 function renderResults(results) {
   const resultsNode = document.getElementById('results');
-  console.log(results);
+  //console.log(results);
   if (0 === results.length) {
     resultsNode.className = "no-results"
     resultsNode.innerHTML = '<span>No results found.</span>';
@@ -48,7 +48,34 @@ function renderResults(results) {
   }
 
   resultsNode.className = "";
-  var html = '';
+
+  const groups = results.reduce((prev, d) => {
+    if (!prev[d.type]) {
+      prev[d.type] = [];
+    }
+    prev[d.type].push(d);
+    return prev;
+  }, {});
+  let html = '';
+  Object.keys(groups).forEach(d => {
+    groups[d] = groups[d].sort((a,b)=>{return a.name.localeCompare(b.name)}).slice(0,5);
+    const groupTitle = convert_type(d);
+    const rows = groups[d].reduce((html, dd) => {
+      return `${html}<li><a href="${dd.url}">${dd.name}</a></li>`;
+    }, '');
+    const pod = `
+      <div class="pod">
+        <h3>${groupTitle}</h3>
+        <ul>
+          ${rows}
+        </ul>
+      </div>
+    `;
+    html += pod;
+  });
+  console.log(groups);
+  console.log(html);
+  /*
   html = `    <div class="pod">
         <h3>Banks</h3>
         <ul>
@@ -69,6 +96,7 @@ function renderResults(results) {
 
         </div>
 `;
+*/
   resultsNode.innerHTML = html;
   /*
   results.forEach(r => {
